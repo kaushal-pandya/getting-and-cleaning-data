@@ -13,41 +13,41 @@ This tutorial may be useful (https://github.com/hadley/httr/blob/master/demo/oau
 
 
 ##install.packages("jsonlite")
-'''(r)library(jsonlite)'''
+```(r)library(jsonlite)'''
 ##install.packages("httpuv")
-'''(r)library(httpuv)'''
+```(r)library(httpuv)'''
 ##install.packages("httr")
-'''(r)library(httr)'''
+```(r)library(httr)'''
 
 ##Can be github, linkedin etc depending on application
-'''(r)oauth_endpoints("github")
-'''
+```(r)oauth_endpoints("github")
+```
 ##Change based on what you 
-'''(r)myapp <- oauth_app(appname = "Coursera_John_Hopkins",
+```(r)myapp <- oauth_app(appname = "Coursera_John_Hopkins",
                    key = "8b9703da1e052297a03e",
                    secret = "7add04df2a71f70ae23cad140d3e3d9a5d56cda3")
-'''
+```
 ##Get OAuth credentials
-'''(r)github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
-'''
+```(r)github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+```
 ##Use API
-'''(r)gtoken <- config(token = github_token)
+```(r)gtoken <- config(token = github_token)
 req <- GET("https://api.github.com/users/jtleek/repos", gtoken)
-'''
+```
 ##Take action on http error
-'''(r)stop_for_status(req)
-'''
+```(r)stop_for_status(req)
+```
 ##Extract content from a request
-'''(r)json1 = content(req)
-'''
+```(r)json1 = content(req)
+```
 ##Convert to a data.frame
-'''(r)gitDF = jsonlite::fromJSON(jsonlite::toJSON(json1))
-'''
+```(r)gitDF = jsonlite::fromJSON(jsonlite::toJSON(json1))
+```
 ##Subset data.frame
-'''(r)gitDF[gitDF$full_name == "jtleek/datasharing", "created_at"] 
+```(r)gitDF[gitDF$full_name == "jtleek/datasharing", "created_at"] 
 Answer: 
 2013-11-07T13:25:07Z
-'''
+```
 
 
 #Question 2
@@ -62,7 +62,7 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv
 Which of the following commands will select only the data for the probability weights pwgtp1 with ages less than 50?
 
 ##install.packages("sqldf")
-'''(r)
+```(r)
 library("sqldf")
 
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv"
@@ -72,15 +72,15 @@ acs <- data.table::data.table(read.csv(f))
 
 Answer: 
 sqldf("select pwgtp1 from acs where AGEP < 50")
-'''
+```
 #Question 3
 Using the same data frame you created in the previous problem, what is the equivalent function to
-'''(r)
+```(r)
 unique(acs$AGEP)
 
 Answer
 sqldf("select distinct AGEP from acs")
-'''
+```
 #Question 4
 
 How many characters are in the 10th, 20th, 30th and 100th lines of HTML from this page:
@@ -88,7 +88,7 @@ How many characters are in the 10th, 20th, 30th and 100th lines of HTML from thi
 http://biostat.jhsph.edu/~jleek/contact.html
 
 (Hint: the nchar() function in R may be helpful)
-'''(r)
+```(r)
 connection <- url("http://biostat.jhsph.edu/~jleek/contact.html")
 htmlCode <- readLines(connection)
 close(connection)
@@ -96,7 +96,7 @@ c(nchar(htmlCode[10]), nchar(htmlCode[20]), nchar(htmlCode[30]), nchar(htmlCode[
 
 Answer: 
  45 31 7 25
-'''
+```
 #Question 5
 Read this data set into R and report the sum of the numbers in the fourth of the nine columns.
 
@@ -105,7 +105,7 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fwksst8110.for
 Original source of the data: http://www.cpc.ncep.noaa.gov/data/indices/wksst8110.for
 
 (Hint this is a fixed width file format)
-'''(r)
+```(r)
 url <- "https://d396qusza40orc.cloudfront.net/getdata%2Fwksst8110.for"
 lines <- readLines(url, n = 10)
 w <- c(1, 9, 5, 4, 1, 3, 5, 4, 1, 3, 5, 4, 1, 3, 5, 4, 1, 3)
@@ -118,7 +118,7 @@ sum(d[, 4])
 
 Answer: 
 32426.7
-'''
+```
 
 
 
